@@ -31,10 +31,6 @@ Options:
 --help
 --version
 --quiet                                   [default: off]
---just-indexbuild
---just-map
---just-counttable
---just-de
 -o/--output-dir        <dirname>          [default: ./wedr_out]
 -x/--index-dir         <dirname>          [default: ./wedr_index]
 -m/--mapper            <tophat|bowtie>    [default: bowtie]
@@ -56,6 +52,10 @@ Options:
 -n/--num-threads       <int>              [default: 1]
 --group-all                               [default: off]
 -p/--path
+--just-indexbuild
+--just-map
+--just-counttable
+--just-de
 """
 
 def wedr_main(arguments):
