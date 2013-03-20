@@ -1,0 +1,83 @@
+#! /usr/bin/env python
+
+from sys import argv
+try:
+    from psyco import full
+    full()
+except ImportError:
+    pass
+
+from wedring import __version__
+from wedring import wedr_quit
+from wedring import wedr_report
+from wedring import Wedring
+from wedring import WedringError
+
+WEDR_HELP = """
+:: The Wedring Pipeline ::
+
+Description:
+This pipeline gathers some bioinformatics softwares to achieve differentially
+expressed genes from RNA-Seq experiment. The softwares used are TopHat, Bowtie,
+SAMtools, BEDTools and DESeq (from the Bioconductor project). It maps the
+sequencing libraries against a reference genome, calculates the mapping
+coverage and other countings and then differential expression is calculated
+using DESeq's statistics.
+
+Usage:
+wedr [options]
+
+Options:
+--help
+--version
+--quiet                                   [default: off]
+--just-indexbuild
+--just-map
+--just-counttable
+--just-de
+-o/--output-dir        <dirname>          [default: ./wedr_out]
+-x/--index-dir         <dirname>          [default: ./wedr_index]
+-m/--mapper            <tophat|bowtie>    [default: bowtie]
+-r/--ref-sequence      <filename>
+-i/--bw-index          <filename>
+-l/--lib-file          <filename>
+-1/--pair-mate-1       <filename>
+-2/--pair-mate-2       <filename>
+-q/--quals             <filename>
+--q1                   <filename>
+--q2                   <filename>
+-a/--annot-files       <filename>
+-g/--coverage-files    <filename>
+-c/--config-file       <filename>
+-t/--count-table       <filename>         [default: count_table.txt]
+--map-label            <string>
+--index-label          <string>
+-d/--conditions        <string>
+-n/--num-threads       <int>              [default: 1]
+--group-all                               [default: off]
+-p/--path
+"""
+
+def wedr_main(arguments):
+    for arg in arguments:
+        if "--version" in arg:
+            wedr_report("Wedring pipeline version %s" % __version__)
+            wedr_quit()
+        elif "--help" in arg:
+            wedr_report(WEDR_HELP, date=False)
+            wedr_quit()
+    try:
+        wedr_report("Starting Wedring pipeline.")
+        wedr = Wedring(arguments)
+        wedr.run()
+    except WedringError as wr_err:
+        wedr_report(wr_err)
+        wedr_quit(status=wr_err.errno)
+    except KeyboardInterrupt as ki:
+        wedr_report("[%s] Execution stoped." % type(ki).__name__)
+        wedr_quit()
+    else:
+        wedr_quit()
+
+if __name__ == "__main__":
+    wedr_main(argv[1:])
