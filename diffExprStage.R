@@ -194,7 +194,7 @@ if ("-help" %in% args) {
 
 if (length(parsed.opts$arguments) < 2) {
   writeLines("Usage:
-    Rscript wedrdep.R [options] <infile> <conditions> [<outfile>]")
+    Rscript diffExprStage.R [options] <infile> <conditions> [<outfile>]")
   stop("Insufficient number of arguments.")
 }
 
