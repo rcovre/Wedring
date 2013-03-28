@@ -132,7 +132,7 @@ def get_count_table(annotation, coverage, conditions):
                         if all(starmap(eq, izip(feat[1:], cov_record[2:5]))):
                             count_cols[column][feat[0]] = cov_record[9]
                             break
-    return (i for i in izip(feats_col, *count_cols))
+    return (row for row in izip(feats_col, *count_cols))
 
 def hash_genome_features(annotation_file):
     """Generate a lookup table for fast searching of the genomic features.
