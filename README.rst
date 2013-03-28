@@ -8,12 +8,11 @@ as a Python package, named *wedring*, and also has the command line interface
 *wedr*.
 
 The softwares used are:
-
-* `Bowtie <http://bowtie-bio.sourceforge.net/index.shtml>`_
-* `TopHat <http://tophat.cbcb.umd.edu/>`_
-* `SAMtools <http://samtools.sourceforge.net/>`_
-* `BEDTools <http://code.google.com/p/bedtools/>`_
-* `DESeq <http://www-huber.embl.de/users/anders/DESeq/>`_
+`Bowtie <http://bowtie-bio.sourceforge.net/index.shtml>`_,
+`TopHat <http://tophat.cbcb.umd.edu/>`_,
+`SAMtools <http://samtools.sourceforge.net/>`_,
+`BEDTools <http://code.google.com/p/bedtools/>`_ and
+`DESeq <http://www-huber.embl.de/users/anders/DESeq/>`_.
 
 The pipeline has four stages:
 
